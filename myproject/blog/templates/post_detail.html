@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.text }}</p>
+    <p>Автор: {{ post.author }}</p>
+    <p>Дата публикации: {{ post.published_date }}</p>
+    
+    <h3>Комментарии</h3>
+    <ul>
+        {% for comment in post.comments %}
+            <li>
+                <p>{{ comment.author }}: {{ comment.text }} ({{ comment.date }})</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

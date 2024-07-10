@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Блог{% endblock %}</title>
+
+    <!-- Подключение Bootstrap 5 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
+    <!-- Блок для дополнительных стилей и скриптов в head -->
+    {% block head %}{% endblock %}
+
+    <!-- Блок для дополнительных стилей -->
+    <style>
+        body {
+            background-color: AliceBlue;
+        }
+        {% block style %}{% endblock %}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Дзен №2</h1>
+    </header>
+
+    <!-- Навигационное меню -->
+    <nav>
+        {% block nav %}
+        {% endblock %}
+    </nav>
+
+    <!-- Основное содержимое страницы -->
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer>
+        {% block footer %}
+            <p>&copy; 2024</p>
+        {% endblock %}
+    </footer>
+
+    <!-- Подключение Bootstrap JS и других JavaScript файлов -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

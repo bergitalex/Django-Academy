@@ -1,0 +1,8 @@
+.post {
+        height: 300px;
+        width: 500px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+        padding: 20px;
+        overflow: hidden;
+}
