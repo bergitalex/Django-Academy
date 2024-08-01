@@ -5,15 +5,18 @@
 {% block content %}
     <h2>{{ post.title }}</h2>
     <p>{{ post.text }}</p>
-    <p>Автор: {{ post.author }}</p>
-    <p>Дата публикации: {{ post.published_date }}</p>
-    
+    <p><strong>Автор:</strong> {{ post.author }}</p>
+    <p><strong>Дата публикации:</strong> {{ post.published_date }}</p>
+    <p><strong>Дата обновления:</strong> {{ post.updated_date }}</p>
+
     <h3>Комментарии</h3>
     <ul>
-        {% for comment in post.comments %}
+        {% for comment in post.comments.all %}
             <li>
-                <p>{{ comment.author }}: {{ comment.text }} ({{ comment.date }})</p>
+                <p><strong>{{ comment.author.get_full_name }}</strong>: {{ comment.text }} ({{ comment.date }})</p>
             </li>
+        {% empty %}
+            <li>Нет комментариев</li>
         {% endfor %}
     </ul>
 {% endblock %}

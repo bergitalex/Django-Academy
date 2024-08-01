@@ -1,25 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
-# Пример данных
-posts = [
-    {
-        "category": "Python",
-        "tags": ["основы", "синтаксис", "советы"],
-        "slug": "introduction-to-python",
-        "title": "Введение в Python",
-        "text": ("Python — это высокоуровневый язык программирования с простым синтаксисом и мощными библиотеками. "
-                 "Он широко используется для разработки веб-приложений, анализа данных, научных исследований и автоматизации задач. "
-                 "Благодаря своей универсальности и поддержке сообщества, Python стал одним из самых популярных языков программирования в мире. "
-                 "Кроме того, наличие множества онлайн-курсов и документации делает его отличным выбором для начинающих. "
-                 "В этой статье мы рассмотрим основные концепции и примеры использования Python."),
-        "author": "Иван Петров",
-        "published_date": "2024-06-25",
-        "comments": [
-            {"author": "Алексей Смирнов", "text": "Отличная статья для новичков!", "date": "2024-06-26"},
-            {"author": "Мария Иванова", "text": "Python действительно лучший выбор для начинающих.", "date": "2024-06-27"}
-        ]
-    }
-]
+from .models import Post
 
 menu = [
     {
@@ -42,8 +23,8 @@ menu = [
 def main(request):
     context = {
         'menu': menu,
-        'posts': posts,
     }
+    print(context.values())
     return render(request, 'main.html', context)
 
 def about(request):
@@ -56,12 +37,22 @@ def about(request):
 def blog(request):
     context = {
         'menu': menu,
+        'posts': Post.objects.all(),
+    }
+    return render(request, 'blog.html', context)
+
+def post_list(request):
+    """Представление, которое возвращает список всех постов."""
+    posts = Post.objects.all()
+    context = {
+        'menu': menu,
         'posts': posts,
     }
     return render(request, 'blog.html', context)
 
 def post_detail(request, slug):
-    post = next(post for post in posts if post["slug"] == slug)
+    """Представление, которое возвращает конкретный пост по slug."""
+    post = get_object_or_404(Post, slug=slug)
     context = {
         'menu': menu,
         'post': post,

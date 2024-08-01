@@ -27,10 +27,13 @@
         <h1>Дзен №2</h1>
     </header>
 
-    <!-- Навигационное меню -->
+    <!-- Меню -->
     <nav>
-        {% block nav %}
-        {% endblock %}
+        <ul>
+            {% for item in menu %}
+                <li><a href="{{ item.url }}">{{ item.name }}</a></li>
+            {% endfor %}
+        </ul>
     </nav>
 
     <!-- Основное содержимое страницы -->
