@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 
-from .models import Post
+from .models import Post, Category, Tag
 
 menu = [
     {
@@ -57,4 +57,5 @@ def post_detail(request, slug):
         'menu': menu,
         'post': post,
     }
+    print(post.tags)
     return render(request, 'post_detail.html', context)

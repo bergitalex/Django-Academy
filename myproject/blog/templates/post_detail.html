@@ -8,13 +8,21 @@
     <p><strong>Автор:</strong> {{ post.author }}</p>
     <p><strong>Дата публикации:</strong> {{ post.published_date }}</p>
     <p><strong>Дата обновления:</strong> {{ post.updated_date }}</p>
-
+    <p><strong>Теги:</strong>
+        {% for tag in post.tags.all %}
+            {{ tag.name }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            Нет тегов
+        {% endfor %}
+    <p><strong>Категория:</strong> {{ post.category }}</p>
     <h3>Комментарии</h3>
     <ul>
         {% for comment in post.comments.all %}
-            <li>
-                <p><strong>{{ comment.author.get_full_name }}</strong>: {{ comment.text }} ({{ comment.date }})</p>
-            </li>
+            {% if comment.status != 'unchecked' %}
+                <li>
+                    <p><strong>{{ comment.author.username }}</strong>: {{ comment.text }} </p>
+                </li>
+            {% endif %}
         {% empty %}
             <li>Нет комментариев</li>
         {% endfor %}
