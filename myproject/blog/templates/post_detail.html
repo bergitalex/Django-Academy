@@ -15,6 +15,7 @@
             Нет тегов
         {% endfor %}
     <p><strong>Категория:</strong> {{ post.category }}</p>
+    <p><strong>Просмотры:</strong> {{ post.views }}</p>
     <h3>Комментарии</h3>
     <ul>
         {% for comment in post.comments.all %}
